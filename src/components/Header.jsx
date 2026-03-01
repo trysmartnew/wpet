@@ -61,10 +61,6 @@ export default function Header() {
             )}
           </Link>
           
-          <a href="https://wa.me/5524992618871" target="_blank" className="btn-whatsapp" style={{ padding: '10px 20px', fontSize: '14px', display: 'none' }} id="header-cta">
-            <i className="fab fa-whatsapp"></i> WhatsApp
-          </a>
-
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ background: 'none', color: 'var(--color-text)', fontSize: '24px' }} className="mobile-menu-btn">
             <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
@@ -101,7 +97,6 @@ export default function Header() {
         @media (min-width: 1024px) {
           .desktop-nav { display: block !important; }
           .mobile-menu-btn { display: none !important; }
-          #header-cta { display: inline-flex !important; }
         }
         .nav-link:hover { color: var(--color-accent); }
       `}</style>
