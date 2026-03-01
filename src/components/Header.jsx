@@ -60,7 +60,7 @@ export default function Header() {
               </span>
             )}
           </Link>
-          
+
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ background: 'none', color: 'var(--color-text)', fontSize: '24px' }} className="mobile-menu-btn">
             <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
