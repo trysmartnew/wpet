@@ -111,8 +111,8 @@ export default function Home() {
 
             <div style={{ flex: '0 0 320px' }}>
               <div className="card" style={{ padding: '28px', border: '1px solid rgba(0,196,212,0.2)', borderRadius: '24px', boxShadow: '0 24px 64px rgba(0,196,212,0.08)' }}>
-                <div style={{ aspectRatio: '4/3', background: 'var(--color-surface2)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className="fas fa-paw" style={{ fontSize: '48px', color: 'var(--color-accent)', opacity: 0.25 }}></i>
+                <div style={{ aspectRatio: '4/3', background: 'var(--color-surface2)', borderRadius: '16px', overflow: 'hidden' }}>
+                  <img src="/images/pos-cirurgica-canina-1.png" alt="Roupa Pós-Cirúrgica Canina" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '16px' }}>
                   <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: '#00C4D4' }}></div>
@@ -156,8 +156,8 @@ export default function Home() {
 
             <div style={{ flex: '0 0 320px' }}>
               <div className="card" style={{ padding: '28px', border: '1px solid rgba(0,196,212,0.2)', borderRadius: '24px', boxShadow: '0 24px 64px rgba(0,196,212,0.08)' }}>
-                <div style={{ aspectRatio: '4/3', background: 'var(--color-surface2)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className="fas fa-paw" style={{ fontSize: '48px', color: 'var(--color-accent)', opacity: 0.25 }}></i>
+                <div style={{ aspectRatio: '4/3', background: 'var(--color-surface2)', borderRadius: '16px', overflow: 'hidden' }}>
+                  <img src="/images/pos-cirurgica-canina-2.jpg" alt="Roupa Ortopédica Canina" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '16px' }}>
                   <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: '#00C4D4' }}></div>

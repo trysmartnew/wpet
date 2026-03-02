@@ -5,7 +5,6 @@
 // ─────────────────────────────────────────────────────────────
 
 // ── CORES E ESTAMPAS ─────────────────────────────────────────
-// Usada em todos os produtos. Edite nomes, hex e descrições aqui.
 export const cores = [
   {
     nome: 'Azul Turquesa',
@@ -58,9 +57,6 @@ export const cores = [
 ]
 
 // ── TABELAS DE PREÇO ──────────────────────────────────────────
-// Chave = número do tamanho (Nº). Valor = preço em R$.
-// Para mudar um preço, edite apenas o número após os dois-pontos.
-
 export const precoPosCirurgicaCaes = {
    0: 29.00,  1: 29.00,  2: 30.00,  3: 32.00,
    4: 32.00,  5: 32.00,  6: 38.00,  7: 38.00,
@@ -80,13 +76,14 @@ export const precoOrtopedica = {
 }
 
 // ── PRODUTOS PÓS-CIRÚRGICOS ───────────────────────────────────
-// Cada objeto = um card de produto na página /pos-cirurgicas
-// Edite nome, badge, slogan. tabelaPreco aponta para as tabelas acima.
+// ⚠️  Para trocar imagem: coloque o arquivo em public/images/
+//     e atualize apenas o caminho abaixo (ex: '/images/nova-foto.jpg')
 
 export const produtosPosCirurgicas = [
   {
     id: 1,
     nome: 'Roupa Pós-Cirúrgica Canina',
+    imagem: '/images/pos-cirurgica-canina-1.png',
     categoria: 'Pós-Cirúrgica',
     badge: 'PÓS-CIRÚRGICA',
     slogan: 'Proteção anatômica para cães de todos os portes.',
@@ -96,6 +93,7 @@ export const produtosPosCirurgicas = [
   {
     id: 2,
     nome: 'Roupa Pós-Cirúrgica Felina',
+    imagem: '/images/felina-sentada.png',
     categoria: 'Pós-Cirúrgica',
     badge: 'PÓS-CIRÚRGICA',
     slogan: 'Design exclusivo que respeita a agilidade dos gatos.',
@@ -105,6 +103,7 @@ export const produtosPosCirurgicas = [
   {
     id: 3,
     nome: 'Macacão Pós-Cirúrgico Total',
+    imagem: '/images/pos-cirurgica-canina-2.jpg',
     categoria: 'Pós-Cirúrgica',
     badge: 'PÓS-CIRÚRGICA',
     slogan: 'Cobertura máxima para procedimentos complexos.',
@@ -114,12 +113,11 @@ export const produtosPosCirurgicas = [
 ]
 
 // ── PRODUTOS ORTOPÉDICOS ──────────────────────────────────────
-// Cada objeto = um card de produto na página /ortopedicas
-
 export const produtosOrtopedicas = [
   {
     id: 4,
     nome: 'Roupa Ortopédica Canina',
+    imagem: '/images/pos-cirurgica-canina-3.jpg',
     categoria: 'Ortopédica',
     badge: 'ORTOPÉDICA',
     slogan: 'Sustentação muscular e articular para cães.',
@@ -129,6 +127,7 @@ export const produtosOrtopedicas = [
   {
     id: 5,
     nome: 'Roupa Ortopédica Felina',
+    imagem: '/images/felina-deitada.png',
     categoria: 'Ortopédica',
     badge: 'ORTOPÉDICA',
     slogan: 'Estabilidade com total liberdade de movimento.',
@@ -138,6 +137,7 @@ export const produtosOrtopedicas = [
   {
     id: 6,
     nome: 'Colete Ortopédico Lombar',
+    imagem: '/images/pos-cirurgica-canina-3.jpg',
     categoria: 'Ortopédica',
     badge: 'ORTOPÉDICA',
     slogan: 'Suporte focado na coluna e região lombar.',

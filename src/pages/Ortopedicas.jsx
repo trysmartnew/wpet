@@ -27,6 +27,7 @@ export default function Ortopedicas() {
                 slogan={produto.slogan}
                 cores={produto.cores}
                 tabelaPreco={produto.tabelaPreco}
+                imagem={produto.imagem}
               />
             ))}
           </div>

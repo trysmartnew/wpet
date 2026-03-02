@@ -35,7 +35,7 @@ function getPreco(tabelaPreco, tamanhoSelecionado) {
   return tabelaPreco?.[chave] ?? null
 }
 
-export default function ProductCard({ nome, categoria, badge, slogan, cores, tabelaPreco }) {
+export default function ProductCard({ nome, categoria, badge, slogan, cores, tabelaPreco, imagem }) {
   const { addItem } = useCart();
   const [sexo, setSexo] = useState('Fêmea');
   const [tamanho, setTamanho] = useState(null);
@@ -44,6 +44,7 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
   const [pesoPet, setPesoPet] = useState('');
   const [tamanhoCalc, setTamanhoCalc] = useState(null);
   const [isColorsOpen, setIsColorsOpen] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const peso = parseFloat(pesoPet)
@@ -78,11 +79,43 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
 
   return (
     <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* ① Imagem placeholder */}
-      <div style={{ background: 'var(--color-surface2)', borderRadius: 16, aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-        <i className="fas fa-paw" style={{ fontSize: 48, color: 'var(--color-accent)', opacity: 0.3 }} />
+
+      {/* ① Imagem do produto */}
+      <div style={{
+        background: 'var(--color-surface2)',
+        borderRadius: 16,
+        aspectRatio: '1/1',
+        overflow: 'hidden',
+        position: 'relative'
+      }}>
+        {imagem && !imgError ? (
+          <img
+            src={imagem}
+            alt={nome}
+            onError={() => setImgError(true)}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block'
+            }}
+          />
+        ) : (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%'
+          }}>
+            <i className="fas fa-paw" style={{ fontSize: 48, color: 'var(--color-accent)', opacity: 0.3 }} />
+          </div>
+        )}
         {cor && (
-           <div style={{ position: 'absolute', bottom: 12, right: 12, width: 32, height: 32, borderRadius: '50%', background: cor.hex, border: '2px solid var(--color-text)' }} />
+          <div style={{
+            position: 'absolute', bottom: 12, right: 12,
+            width: 32, height: 32, borderRadius: '50%',
+            background: cor.hex, border: '2px solid var(--color-text)'
+          }} />
         )}
       </div>
 
@@ -117,7 +150,6 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
         </div>
       </div>
 
-      {/* ⑥ Divisor hr sutil ciano */}
       <hr style={{ border: 'none', height: '1px', background: 'rgba(0, 196, 212, 0.1)', margin: '4px 0' }} />
 
       {/* ⑦ Acordeão cores/estampas */}
@@ -125,17 +157,11 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
         <button 
           onClick={() => setIsColorsOpen(!isColorsOpen)}
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-            background: 'var(--color-surface2)',
-            border: '1px solid var(--color-border)',
-            borderRadius: '50px',
-            padding: '10px 20px',
-            color: 'var(--color-text)',
-            fontSize: '13px',
-            fontWeight: 600
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            width: '100%', background: 'var(--color-surface2)',
+            border: '1px solid var(--color-border)', borderRadius: '50px',
+            padding: '10px 20px', color: 'var(--color-text)',
+            fontSize: '13px', fontWeight: 600
           }}
         >
           <span className="all-caps">Cores e Estampas</span>
@@ -144,27 +170,17 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
 
         {isColorsOpen && (
           <div className="fade-slide-up" style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            gap: '10px', 
-            padding: '12px',
-            background: 'rgba(255,255,255,0.02)',
-            borderRadius: '16px',
+            display: 'flex', flexWrap: 'wrap', gap: '10px', padding: '12px',
+            background: 'rgba(255,255,255,0.02)', borderRadius: '16px',
             border: '1px dashed var(--color-border)'
           }}>
             {cores.map(c => (
               <button 
-                key={c.nome}
-                onClick={() => setCor(c)}
-                title={c.nome}
+                key={c.nome} onClick={() => setCor(c)} title={c.nome}
                 style={{
-                  width: '32px', 
-                  height: '32px', 
-                  borderRadius: '50%', 
-                  background: c.hex, 
+                  width: '32px', height: '32px', borderRadius: '50%', background: c.hex,
                   border: cor?.nome === c.nome ? '3px solid var(--color-accent)' : '2px solid rgba(255,255,255,0.1)',
-                  flexShrink: 0,
-                  transition: 'transform 0.2s',
+                  flexShrink: 0, transition: 'transform 0.2s',
                   transform: cor?.nome === c.nome ? 'scale(1.1)' : 'scale(1)'
                 }}
               />
@@ -206,30 +222,21 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
 
       <div className="size-calc-block">
         <label className="all-caps" style={{ fontSize: '12px', color: 'var(--color-accent)' }}>Tamanho da Roupa</label>
-
         <input
-          type="number"
-          min="0.1" max="100" step="0.1"
+          type="number" min="0.1" max="100" step="0.1"
           placeholder="Peso do pet (kg)"
           value={pesoPet}
           onChange={e => setPesoPet(e.target.value)}
           className="input-peso-pet"
         />
-
         {tamanhoCalc !== null && (
-          <span className="tamanho-resultado">
-            Tamanho Nº {tamanhoCalc}
-          </span>
+          <span className="tamanho-resultado">Tamanho Nº {tamanhoCalc}</span>
         )}
-
         {pesoPet && tamanhoCalc === null && (
-          <span className="tamanho-fora">
-            Peso fora da tabela — consulte a WPet
-          </span>
+          <span className="tamanho-fora">Peso fora da tabela — consulte a WPet</span>
         )}
       </div>
 
-      {/* ⑨ Seletor de tamanho (exibindo o resultado calculado) */}
       {tamanho && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', background: 'var(--color-surface2)', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
           <span className="all-caps" style={{ fontSize: '10px', color: 'var(--color-text-muted)' }}>Selecionado:</span>
@@ -237,7 +244,6 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
         </div>
       )}
 
-      {/* ⑩ Bloco de preço (dinâmico por tamanho) */}
       {(() => {
         const preco = getPreco(tabelaPreco, tamanho)
         return (
@@ -245,9 +251,7 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
             {preco !== null ? (
               <>
                 <span className="preco-label">Valor unitário</span>
-                <span className="preco-valor">
-                  R$ {preco.toFixed(2).replace('.', ',')}
-                </span>
+                <span className="preco-valor">R$ {preco.toFixed(2).replace('.', ',')}</span>
               </>
             ) : (
               <span className="preco-hint">
@@ -258,19 +262,16 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
         )
       })()}
 
-      {/* ⑪ Bloco de composição (Placeholder conforme hierarquia) */}
       <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', display: 'flex', gap: '4px' }}>
         <span style={{ fontWeight: 600 }}>Composição:</span>
         <span>90% Poliamida, 10% Elastano</span>
       </div>
 
-      {/* ⑫ Aviso de pedido WhatsApp + cadeado */}
       <div className="aviso-pedido">
         <i className="fas fa-lock" />
         <span>Pedido confirmado com segurança via WhatsApp</span>
       </div>
 
-      {/* ⑬ Botões de ação */}
       <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <button 
           className="btn-primary" 
@@ -288,9 +289,7 @@ export default function ProductCard({ nome, categoria, badge, slogan, cores, tab
         <button 
           onClick={() => setIsModalOpen(true)} 
           className="btn-outlined"
-          style={{ 
-            width: '100%', justifyContent: 'center', fontSize: '14px', padding: '10px'
-          }}
+          style={{ width: '100%', justifyContent: 'center', fontSize: '14px', padding: '10px' }}
         >
           <i className="fas fa-file-alt"></i> Ver Descrição
         </button>
